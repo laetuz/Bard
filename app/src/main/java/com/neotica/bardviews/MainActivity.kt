@@ -41,30 +41,6 @@ class MainActivity : AppCompatActivity() {
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
 
-            // Inject JavaScript code to force dark mode
-            val darkModeScript = """
-    (function() {
-        var css = 'body { background-color: #333; color: #fff; }'; // Example dark mode styles
-        css += 'h1, h2, h3, h4, h5, h6, p, span { color: #fff; }'; // Text color styles
-        css += 'input[type="text"] { color: #fff; }'; // Text color style for input fields
-        
-        // Listen for text input events
-        document.addEventListener('input', function(event) {
-            var target = event.target;
-            if (target.tagName.toLowerCase() === 'input' && target.type === 'text') {
-                target.style.color = '#fff'; // Set the text color to white
-            }
-        }, false);
-
-        // Apply initial styles
-        var style = document.createElement('style');
-        style.appendChild(document.createTextNode(css));
-        document.head.appendChild(style);
-    })()
-""".trimIndent()
-
-
-            view?.evaluateJavascript(darkModeScript, null)
         }
     }
 }
